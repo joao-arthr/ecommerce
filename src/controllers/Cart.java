@@ -1,4 +1,4 @@
-package ecommerce;
+package controllers;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,6 +33,7 @@ public class Cart {
     }
 
     public List<Product> getProducts() {
+
         return products;
     }
 
