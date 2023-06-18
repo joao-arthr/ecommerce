@@ -1,4 +1,4 @@
-package models.infrastructure;
+package br.com.ecommerce.models.infrastructure;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

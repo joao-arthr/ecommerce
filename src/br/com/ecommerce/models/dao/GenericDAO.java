@@ -1,6 +1,7 @@
-package models.dao;
+package br.com.ecommerce.models.dao;
 
-import models.infrastructure.ConnectionDB;
+
+import br.com.ecommerce.models.infrastructure.ConnectionDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

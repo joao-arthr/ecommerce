@@ -1,4 +1,4 @@
-package controllers;
+package br.com.ecommerce.controllers;
 
 import java.math.BigDecimal;
 
@@ -8,6 +8,12 @@ public class Product {
     private BigDecimal price;
     private int quantity;
 
+    public Product(int id, String name, BigDecimal price, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
     public int getId() {
         return id;

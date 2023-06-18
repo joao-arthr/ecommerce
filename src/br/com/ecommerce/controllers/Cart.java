@@ -1,4 +1,4 @@
-package controllers;
+package br.com.ecommerce.controllers;
 
 import java.math.BigDecimal;
 import java.util.List;

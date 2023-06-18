@@ -1,6 +1,6 @@
-package models.dao;
+package br.com.ecommerce.models.dao;
 
-import controllers.Product;
+import br.com.ecommerce.controllers.Product;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
