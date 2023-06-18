@@ -1,3 +1,4 @@
 
-O
-src/ecommerce/ConnectionDB.java,d\f\dfb7888dcdc048ec22234aeb4ff2b6f8df864fc9
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302

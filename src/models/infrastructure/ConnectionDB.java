@@ -1,22 +1,16 @@
-package models;
+package models.infrastructure;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionDB {
+public abstract class ConnectionDB {
     private static final String URL = "jdbc:mysql://localhost:3306/ecommerce";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
 
-
-    public ConnectionDB(){
-        getConnection();
-    }
-
-    public static Connection getConnection(){
+    protected Connection getConnection(){
         Connection connection = null;
-
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -30,7 +24,7 @@ public class ConnectionDB {
         return connection;
     }
 
-    public void close(Connection connection) {
+    protected void closeConnection(Connection connection) {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();

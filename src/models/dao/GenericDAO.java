@@ -1,14 +1,18 @@
-package models;
+package models.dao;
 
-import models.ConnectionDB;
-
+import models.infrastructure.ConnectionDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class GenericDAO<T> extends ConnectionDB{
-    private final Connection connection = ConnectionDB.getConnection();
+
+public abstract class GenericDAO<T>  extends ConnectionDB{
+    private final Connection connection;
+
+    protected GenericDAO() {
+        this.connection = super.getConnection();
+    }
 
     public void create(T object) {
         try {
@@ -19,7 +23,7 @@ public abstract class GenericDAO<T> extends ConnectionDB{
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            close(connection);
+            super.closeConnection(connection);
         }
     }
 
@@ -44,7 +48,7 @@ public abstract class GenericDAO<T> extends ConnectionDB{
                     System.out.println(e.getMessage());
                 }
             }
-            close(connection);
+            super.closeConnection(connection);
         }
         return object;
     }
@@ -58,7 +62,7 @@ public abstract class GenericDAO<T> extends ConnectionDB{
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            close(connection);
+            super.closeConnection(connection);
         }
     }
 
@@ -79,7 +83,7 @@ public abstract class GenericDAO<T> extends ConnectionDB{
                     System.out.println(e.getMessage());
                 }
             }
-            close(connection);
+            super.closeConnection(connection);
         }
     }
 
@@ -104,7 +108,7 @@ public abstract class GenericDAO<T> extends ConnectionDB{
                     System.out.println(e.getMessage());
                 }
             }
-            close(connection);
+            super.closeConnection(connection);
         }
         return objects;
     }
