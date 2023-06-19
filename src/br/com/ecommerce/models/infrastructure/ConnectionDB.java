@@ -14,7 +14,6 @@ public abstract class ConnectionDB {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            System.out.println("Connection to MySQL established successfully!");
         } catch (ClassNotFoundException e) {
             System.out.println("Driver MySQL not found.");
         } catch (SQLException e) {
@@ -28,7 +27,6 @@ public abstract class ConnectionDB {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                System.out.println("Connection closed successfully!");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

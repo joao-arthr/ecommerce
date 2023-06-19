@@ -8,16 +8,28 @@ import java.sql.SQLException;
 
 public class ProductDAO extends GenericDAO<Product> {
 
+    public ProductDAO() {
+        super();
+    }
+
     @Override
     public String buildInsertQuery(Product object) {
         return "INSERT INTO products (name, price, quantity) VALUES (?, ?, ?)";
     }
 
     @Override
-    public void setParameters(PreparedStatement statement, Product object) throws SQLException {
+    public void setParametersInsert(PreparedStatement statement, Product object) throws SQLException {
         statement.setString(1, object.getName());
         statement.setBigDecimal(2, object.getPrice());
         statement.setInt(3, object.getQuantity());
+    }
+
+    @Override
+    public void setParametersUpdate(PreparedStatement statement, Product object) throws SQLException {
+        statement.setString(1, object.getName());
+        statement.setBigDecimal(2, object.getPrice());
+        statement.setInt(3, object.getQuantity());
+        statement.setInt(4, object.getId());
     }
 
     @Override

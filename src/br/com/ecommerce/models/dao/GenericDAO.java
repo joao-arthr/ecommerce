@@ -6,23 +6,21 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.com.ecommerce.views.utils.Constants.getErrorMessage;
 
 
 public abstract class GenericDAO<T>  extends ConnectionDB{
-    private final Connection connection;
-
-    protected GenericDAO() {
-        this.connection = super.getConnection();
-    }
+    private Connection connection = getConnection();
 
     public void create(T object) {
         try {
+            connection = getConnection();
             String sql = buildInsertQuery(object);
             PreparedStatement statement = connection.prepareStatement(sql);
-            setParameters(statement, object);
+            setParametersInsert(statement, object);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(getErrorMessage() +e.getMessage());
         } finally {
             super.closeConnection(connection);
         }
@@ -32,6 +30,7 @@ public abstract class GenericDAO<T>  extends ConnectionDB{
         T object = null;
         PreparedStatement statement = null;
         try {
+            connection = getConnection();
             String sql = buildSelectByIdQuery();
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
@@ -40,7 +39,7 @@ public abstract class GenericDAO<T>  extends ConnectionDB{
                 object = buildObject(resultSet);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(getErrorMessage() +e.getMessage());
         } finally {
             if(statement != null) {
                 try {
@@ -56,12 +55,13 @@ public abstract class GenericDAO<T>  extends ConnectionDB{
 
     public void update(T object) {
         try {
+            connection = getConnection();
             String sql = buildUpdateQuery(object);
             PreparedStatement statement = connection.prepareStatement(sql);
-            setParameters(statement, object);
+            setParametersUpdate(statement, object);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error: "+e.getMessage());
         } finally {
             super.closeConnection(connection);
         }
@@ -70,12 +70,13 @@ public abstract class GenericDAO<T>  extends ConnectionDB{
     public void delete(int id) {
         PreparedStatement statement = null;
         try {
+            connection = getConnection();
             String sql = buildDeleteQuery();
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error: "+e.getMessage());
         } finally {
             if(statement != null) {
                 try {
@@ -92,6 +93,7 @@ public abstract class GenericDAO<T>  extends ConnectionDB{
         List<T> objects = new ArrayList<>();
         PreparedStatement statement = null;
         try {
+            connection = getConnection();
             String sql = buildListQuery();
             statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
@@ -100,7 +102,7 @@ public abstract class GenericDAO<T>  extends ConnectionDB{
                 objects.add(object);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } finally {
             if(statement != null) {
                 try {
@@ -116,7 +118,9 @@ public abstract class GenericDAO<T>  extends ConnectionDB{
 
     protected abstract String buildInsertQuery(T object);
 
-    protected abstract void setParameters(PreparedStatement statement, T object) throws SQLException ;
+    protected abstract void setParametersInsert(PreparedStatement statement, T object) throws SQLException ;
+
+    protected abstract void setParametersUpdate(PreparedStatement statement, T object) throws SQLException ;
 
     protected abstract T buildObject(ResultSet resultSet) throws SQLException;
 

@@ -8,7 +8,7 @@ public class Product {
     private BigDecimal price;
     private int quantity;
 
-    public Product(int id, String name, BigDecimal price, int quantity) {
+    public Product(Integer id, String name, BigDecimal price, int quantity) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -50,5 +50,10 @@ public class Product {
     public void setQuantity(int quantity) {
 
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return  id + " | " + name + '|' + price + " | " + quantity;
     }
 }
