@@ -18,9 +18,9 @@ public class CartMenu {
 
     private static Cart cart;
     protected CartMenu(){
-        cart = c.openCartSelect();
         int choice;
         do {
+            cart = c.openCartSelect();
             System.out.println("---Cart Management---");
             System.out.println("1. View Cart");
             System.out.println("2. Add Products to Cart");
