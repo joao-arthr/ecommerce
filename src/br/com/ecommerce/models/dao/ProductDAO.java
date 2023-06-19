@@ -61,4 +61,6 @@ public class ProductDAO extends GenericDAO<Product> {
     public String buildListQuery() {
         return "SELECT * FROM products";
     }
+
+
 }

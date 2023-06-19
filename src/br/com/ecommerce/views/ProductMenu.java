@@ -8,7 +8,8 @@ import static br.com.ecommerce.views.utils.MenuUtils.*;
 
 
 public class ProductMenu {
-    private final ProductDAO p   = new ProductDAO();
+    private final ProductDAO p  = new ProductDAO();
+
     protected ProductMenu(){
         int choice;
         do {
@@ -22,7 +23,7 @@ public class ProductMenu {
             readString();
 
             switch (choice) {
-                case 1 -> listProducts();
+                case 1 -> listProducts(true);
 
                 case 2 -> System.out.println(addProductMenu());
 
@@ -38,14 +39,7 @@ public class ProductMenu {
         } while (choice != 0);
     }
 
-    private void listProducts(){
-        System.out.println("-List of Products-");
-        System.out.println("ID | Name | Price | Quantity" );
-        for (Product product : p.list()) {
-            System.out.println(product.getId() + " | "+ product.getName()+ " | " + product.getPrice()  +
-                    " | "+ product.getQuantity());
-        }
-    }
+
 
     private String addProductMenu(){
         String returnMessage = null;
@@ -68,7 +62,7 @@ public class ProductMenu {
 
         private String updateProductMenu(){
             String returnMessage = null;
-            listProducts();
+            listProducts(true);
             System.out.println("-Update Product-");
             System.out.println("Product ID: ");
             var product = p.findById(readInteger());
@@ -93,7 +87,7 @@ public class ProductMenu {
 
     private String deleteProductMenu(){
         String returnMessage = null;
-        listProducts();
+        listProducts(true);
         System.out.println("-Delete Product-");
         System.out.println("Product ID: ");
         try{
